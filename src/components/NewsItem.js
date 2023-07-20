@@ -9,11 +9,11 @@ let {title,description,imageUrl,newsUrl}=this.props;
 
     return (
       <div className="card" style={{border:"3px solid black",padding:"3px"}}>
-        <img style={{height:"28vh" }}src={imageUrl?imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fthumbnails%2F006%2F299%2F370%2Foriginal%2Fworld-breaking-news-digital-earth-hud-rotating-globe-rotating-free-video.jpg&tbnid=z8af4Y-6O6zlMM&vet=12ahUKEwjj1te1lpaAAxX06DgGHeBUAggQMygBegUIARCDAg..i&imgrefurl=https%3A%2F%2Fwww.vecteezy.com%2Ffree-videos%2Fnews&docid=wazIDNr7AUvTEM&w=3840&h=2160&q=news&ved=2ahUKEwjj1te1lpaAAxX06DgGHeBUAggQMygBegUIARCDAg"} className="card-img-top" alt="..." />
+        <img style={{height:"28vh" }}src={!imageUrl?"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRQf0L4f0exDxDgX4NrZQrUjJknPOW1b010tENUNSJDs5arM_HYregjCoj4Vhb3zIoDm0&usqp=CAU" : imageUrl} className="card-img-top" alt="..." />
         <div className="card-body">
-          <h5 className="card-title">{title}</h5>
-          <p className="card-text">{description} </p>
-          <a href={newsUrl} className="btn btn-sm btn-dark">Read More</a>
+          <h5 className="card-title">{title?title:"Breaking News!"}</h5>
+          <p className="card-text">{description?description:"Click on Read More to get the news description and much more ..."} </p>
+          <a href={newsUrl} target="_blank" className="btn btn-sm btn-dark">Read More</a>
         </div>
       </div>
     )

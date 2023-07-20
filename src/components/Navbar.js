@@ -17,17 +17,14 @@ export class Navbar extends Component {
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/">Home</a>
+                                <a className="nav-link active" aria-current="page" href="/">general</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/about">business</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/about">entertainment</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/about">general</a>
-                            </li>
+                            </li>                            
                             <li className="nav-item">
                                 <a className="nav-link" href="/about">health</a>
                             </li>
