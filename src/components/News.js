@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import NewsItem from './NewsItem'
+import Spinner from './Spinner'
 
 
 export class News extends Component {
 
   static defaultProps={
-    category:'general'
+    category:'general',
+    pageSize:12
     
   }
   static propTypes={
@@ -44,7 +46,19 @@ export class News extends Component {
 
   }
 
+ capitalise=(a)=>{
+    let b=a.charAt(0);
+    let c= b.toUpperCase();
+    // console.log(c);
+    c+=a.slice(1);
+    return c;
+
+ }
+
   async componentDidMount(){
+    this.setState({
+      loading:true,
+    })
     let url =`https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=6b8c3641928f42b29bd8b38a32c84b10 &page=${this.state.page}&pageSize=${this.props.pageSize}`;
     let data= await fetch(url);
 
@@ -52,6 +66,7 @@ export class News extends Component {
     console.log(parsedData);
 
     this.setState({articles:parsedData.articles,totalResults:parsedData.totalResults
+      ,loading:false
     })
   }
  
@@ -88,14 +103,14 @@ export class News extends Component {
   render() {
     return (
       <div className="container my-3">
-        <h1 className="text-center" style={{margin:'35px 0px'}}>NEWSJ - Top Headlines</h1>
-       
+        <h1 className="text-center" style={{margin:'35px 0px'}}>NEWSJ - Top Headlines - {this.capitalise(this.props.category)}</h1>
+       {this.state.loading && <Spinner/>}
         <div className="row">
-          {this.state.articles.map((element) => {
+          {!this.state.loading && this.state.articles.map((element) => {
             return <div className='col-md-4 my-3' key={element.url}>
               {}
-              <NewsItem  title={element.title?element.title.slice(0,68)+"...":""} description={element.description?element.description.slice(0,89)+"...":""}  imageUrl={element.urlToImage}
-              newsUrl={element.url} />
+              <NewsItem  title={element.title?element.title.slice(0,63)+"...":""} description={element.description?element.description.slice(0,89)+"...":""}  imageUrl={element.urlToImage}
+              newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name}/>
             </div>
           }
           )}
