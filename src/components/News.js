@@ -34,8 +34,8 @@ export class News extends Component {
     
   ]
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       articles: this.articles,
@@ -43,6 +43,7 @@ export class News extends Component {
       page:1,
 
     }
+    document.title="NEWSJ - "+this.capitalise(this.props.category)
 
   }
 
@@ -52,7 +53,6 @@ export class News extends Component {
     // console.log(c);
     c+=a.slice(1);
     return c;
-
  }
 
  async updateNews(){
@@ -96,7 +96,7 @@ export class News extends Component {
   render() {
     return (
       <div className="container my-3">
-        <h1 className="text-center" style={{margin:'35px 0px'}}>NEWSJ - Top Headlines - {this.capitalise(this.props.category)}</h1>
+        <h1 className="text-center" style={{margin:'35px 0px'}}>NEWSJ - Top {this.capitalise(this.props.category)} Headlines</h1>
        {this.state.loading && <Spinner/>}
         <div className="row">
           {!this.state.loading && this.state.articles.map((element) => {
