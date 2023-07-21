@@ -16,7 +16,7 @@ let {title,description,imageUrl,newsUrl,author,date,source}=this.props;
         <div className="card-body">
           <h5 className="card-title">{title?title:"Breaking News!"}</h5>
           <p className="card-text">{description?description:"Click on Read More to get the news description and much more ..."} </p>
-          <p className="card-text"><small className="text-muted">By {author?author:"Unknown"} on {new Date(date).toUTCString()}</small></p>
+          <p className="card-text"><small className="text-danger">By {author?author:"Unknown"} on {new Date(date).toUTCString()}</small></p>
           <a href={newsUrl} target="_blank" className="btn btn-sm btn-dark">Read More</a>
         </div>
       </div>

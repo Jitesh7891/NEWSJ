@@ -55,48 +55,41 @@ export class News extends Component {
 
  }
 
+ async updateNews(){
+
+   this.setState({
+     loading:true,
+   })
+   let url =`https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=6b8c3641928f42b29bd8b38a32c84b10 &page=${this.state.page}&pageSize=${this.props.pageSize}`;
+   let data= await fetch(url);
+  
+   let parsedData=await data.json();
+   console.log(parsedData);
+  
+   this.setState({
+    articles:parsedData.articles,
+    totalResults:parsedData.totalResults,
+    loading:false
+   })
+ }
+
   async componentDidMount(){
-    this.setState({
-      loading:true,
-    })
-    let url =`https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=6b8c3641928f42b29bd8b38a32c84b10 &page=${this.state.page}&pageSize=${this.props.pageSize}`;
-    let data= await fetch(url);
-
-    let parsedData=await data.json();
-    console.log(parsedData);
-
-    this.setState({articles:parsedData.articles,totalResults:parsedData.totalResults
-      ,loading:false
-    })
+    this.updateNews();
   }
- 
+  
   handlePrevClick=async()=>{
-    console.log(this.state.page-1)
-    let url =`https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=6b8c3641928f42b29bd8b38a32c84b10&page=${this.state.page-1}&pageSize=${this.props.pageSize}`;
-    let data= await fetch(url);
-    
-    let parsedData=await data.json();
-    console.log(parsedData);
-    
     this.setState({
-      articles:parsedData.articles,
       page:this.state.page-1,
     })
+    this.updateNews()
   }
   
   handleNextClick=async()=>{
-    console.log(this.state.page+1)
-
-
-    let url =`https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=6b8c3641928f42b29bd8b38a32c84b10&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
-    let data= await fetch(url);
-    
-    let parsedData=await data.json();
-    console.log(parsedData);
     
     this.setState({
-    page:this.state.page+1,
-    articles:parsedData.articles})
+      page:this.state.page+1,
+    })
+    this.updateNews()
   }
 
   
